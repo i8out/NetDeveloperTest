@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NetDeveloperTest.Models;
+using NetDeveloperTest.Services;
 
 namespace NetDeveloperTest
 {
@@ -25,6 +28,8 @@ namespace NetDeveloperTest
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddDbContext<User_ProjectContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("UserProjectDb")));
+            services.ConfigureDIPortal();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
