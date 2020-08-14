@@ -1,14 +1,53 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
-</ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <h1>Hello, world!</h1>
+      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
+        quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
+        ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+      <ul>
+        <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+        <li>Aliquam tincidunt mauris eu risus.</li>
+        <li>Vestibulum auctor dapibus neque.</li>
+      </ul>
+      <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas.
+        Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam
+        egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et
+        sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet,
+        wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac
+        dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+    </div>
+    <div class="col-md">
+      <h1>Join Here!</h1>
+      <div class="p-5 border border-dark rounded">
+        <h3>Register here or login</h3>
+          <form #f="ngForm" (ngSubmit)="clickLogin()">
+            <mat-dialog-content>
+              <mat-form-field class="full">
+                <input matInput placeholder="Email" name="email" required
+                  [formControl]="email" cdkFocusInitial>
+              </mat-form-field>
+              <div>
+                <mat-error *ngIf="!email.valid">Email is not valid.</mat-error>
+              </div>
+              <mat-form-field class="full">
+                <input matInput placeholder="Password" name="password" [type]="hide ? 'password' : 'text'" required
+                  [formControl]="password">
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </mat-form-field>
+              <div>
+                <mat-error *ngIf="!password.valid">Email or password is not valid.</mat-error>
+              </div>
+            </mat-dialog-content>
+          </form>
+        
+        <div class="text-center">
+          <button mat-stroked-button color="primary" class="btn controlbutton" type="button"
+            (click)="clickLogin()" [disabled]="email.invalid || password.invalid" style="float:right;">
+            LOGIN
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

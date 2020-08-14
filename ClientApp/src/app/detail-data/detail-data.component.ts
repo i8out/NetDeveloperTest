@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from "@angular/material";
-import { FormControl, Validators, FormGroup } from "@angular/forms";
+import { FormControl, Validators } from "@angular/forms";
 import { UserModel } from '../models/user-model';
 import { UserService } from '../services/user.service';
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using NetDeveloperTest.Services;
 namespace NetDeveloperTest.Controllers
 {
     [Route("api/[controller]")]
+    [AllowAnonymous]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -43,6 +45,20 @@ namespace NetDeveloperTest.Controllers
         public async Task<ActionResult<User>> GetUser(Guid id)
         {
             var user = await _context.User.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
+        // GET: api/Users/ByEmail/email
+        [HttpGet("byemail")]
+        public ActionResult<User> GetUserByEmail(string email)
+        {
+            var user = _userService.GetUserByEmail(email);
 
             if (user == null)
             {

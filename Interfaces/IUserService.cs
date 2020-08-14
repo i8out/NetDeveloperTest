@@ -9,5 +9,6 @@ namespace NetDeveloperTest.Interfaces
 {
     public interface IUserService : IAsyncRepository<User>
     {
+        User GetUserByEmail(string email);
     }
 }

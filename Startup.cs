@@ -34,6 +34,7 @@ namespace NetDeveloperTest
             });
             services.AddDbContext<User_ProjectContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("UserProjectDb")));
             services.ConfigureDIPortal();
+            services.Configure<ConnectionString>(Configuration.GetSection("ConnectionStrings")); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
