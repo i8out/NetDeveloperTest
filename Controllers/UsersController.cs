@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NetDeveloperTest.Interfaces;
 using NetDeveloperTest.Models;
+using NetDeveloperTest.Services;
 
 namespace NetDeveloperTest.Controllers
 {
@@ -14,17 +16,26 @@ namespace NetDeveloperTest.Controllers
     public class UsersController : ControllerBase
     {
         private readonly User_ProjectContext _context;
+        private readonly IUserService _userService;
+        private readonly IEmailSender _emailSender;
 
-        public UsersController(User_ProjectContext context)
+        public UsersController(
+            User_ProjectContext context,
+            IUserService userService,
+            IEmailSender emailSender
+            )
         {
             _context = context;
+            _userService = userService;
+            _emailSender = emailSender;
         }
 
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await _context.User.ToListAsync();
+
+            return Ok(await _userService.GetAll());
         }
 
         // GET: api/Users/5
@@ -42,8 +53,6 @@ namespace NetDeveloperTest.Controllers
         }
 
         // PUT: api/Users/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(Guid id, User user)
         {
@@ -74,15 +83,35 @@ namespace NetDeveloperTest.Controllers
         }
 
         // POST: api/Users
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.User.Add(user);
-            await _context.SaveChangesAsync();
+            if (user.Id == Guid.Parse("00000000-0000-0000-0000-000000000000"))
+            {
+                try
+                {
+                    await _userService.Add(user);
+                    var message = new Message(new string[] { "free.nebula@outlook.com" }, "Welcome email", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+                    _emailSender.SendEmail(message);
+                } 
+                catch
+                {
+                    throw;
+                }
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            }
+            else
+            {
+                var userData = _userService.GetById(user.Id);
+                user.FirstName = user.FirstName ?? userData.FirstName;
+                user.LastName = user.LastName ?? userData.LastName;
+                user.Password = user.Password ?? userData.Password;
+
+                await _userService.Update(user);
+            }
+
+            //return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return Ok(user);
         }
 
         // DELETE: api/Users/5

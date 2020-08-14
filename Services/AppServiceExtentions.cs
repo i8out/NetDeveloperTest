@@ -15,6 +15,7 @@ namespace NetDeveloperTest.Services
         {
             services.AddScoped(typeof(IAsyncRepository<>), typeof(AsyncRepository<>));
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmailSender, EmailSender>();
         }
     }
 }
