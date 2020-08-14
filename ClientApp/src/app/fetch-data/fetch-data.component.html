@@ -1,20 +1,24 @@
 <h1 id="tableLabel">Application Users</h1>
 
-<p>This is the list of users.</p>
+<p>Click on user to make changes.</p>
 
 <p *ngIf="!users"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="users">
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users" onclick="editUser($event)">
-      <td>{{ user.email }}</td>
-      <td>{{ user.fullName }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="datasource" *ngIf="users">
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.email }} </mat-cell>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="fullName">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.fullName }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="editUser(row)"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="resultsLength" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
