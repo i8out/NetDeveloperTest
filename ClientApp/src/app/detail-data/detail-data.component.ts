@@ -2,6 +2,8 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDialogRef } from "@angular/material";
 import { FormControl, Validators, FormGroup } from "@angular/forms";
+import { UserModel } from '../models/user-model';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-detail-data',
@@ -9,31 +11,39 @@ import { FormControl, Validators, FormGroup } from "@angular/forms";
   styleUrls: ['./detail-data.component.css']
 })
 export class DetailDataComponent implements OnInit {
-  @ViewChild('f'                    , { static: false }) form: any;
+  @ViewChild('f', { static: false }) form: any;
+  user = new UserModel();
 
   firstName = new FormControl(this.data.firstName, [Validators.required]);
   lastName = new FormControl(this.data.lastName, [Validators.required]);
   password = new FormControl(this.data.password, [Validators.required]);
-  
+
   constructor(
+    private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogref: MatDialogRef<DetailDataComponent>
   ) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   update() {
-    console.log('update');
-    console.log(this.form);
-    console.log('update frm');
-    console.log(this.firstName.invalid);
+    this.user.id = this.data.id;
+    this.user.firstName = this.firstName.value;
+    this.user.lastName = this.lastName.value;
+    this.user.password = this.password.value;
+    this.userService.updateUser(this.user).subscribe((res: any) => {
+    }, (err) => console.error(err), () => this.savingDone());
+
   }
 
   delete() {
-    console.log('delete');
-    console.log(this.form);
-    console.log('delete frm');
+    this.user.id = this.data.id;
+    this.userService.deleteUser(this.user).subscribe((res: any) => {
+    }, (err) => console.error(err), () => this.savingDone());
+
+  }
+
+  savingDone(): void {
+    this.dialogref.close('From Dialog');
   }
 }
