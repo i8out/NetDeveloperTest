@@ -1,14 +1,41 @@
+<button mat-icon-button mat-dialog-close class="btn-align-right">
+  <mat-icon>cancel</mat-icon>
+</button>
 <h2 mat-dialog-title>User Detail</h2>
-<mat-dialog-content>
+<form #f="ngForm" (ngSubmit)="update()">
+  <mat-dialog-content>
     <div class='fullblock'>
-        <mat-form-field class="full">
-            <input matInput placeholder="First Name" value="{{ this.data.firstName }}" name="firstName">
-        </mat-form-field><br/>
-        <mat-form-field class="full">
-            <input matInput placeholder="Last Name" value="{{ this.data.lastName }}" name="lastName">
-        </mat-form-field><br/>
-        <mat-form-field class="full">
-            <input matInput placeholder="Password" value="{{ this.data.password }}" name="password">
-        </mat-form-field>
+      <p>{{ this.data.email }}</p>
+      <mat-form-field class="full">
+        <input matInput placeholder="First Name" value="{{ this.data.firstName }}" name="firstName" required
+          [formControl]="firstName" cdkFocusInitial>
+      </mat-form-field>
+      <div>
+        <mat-error *ngIf="!firstName.valid">First name is required.</mat-error>
+      </div>
+      <mat-form-field class="full">
+        <input matInput placeholder="Last Name" value="{{ this.data.lastName }}" name="lastName" required
+          [formControl]="lastName">
+      </mat-form-field>
+      <div>
+        <mat-error *ngIf="!lastName.valid">Last name is required.</mat-error>
+      </div>
+      <mat-form-field class="full">
+        <input matInput placeholder="Password" value="{{ this.data.password }}" name="password" required
+          [formControl]="password">
+      </mat-form-field>
+      <div>
+        <mat-error *ngIf="!password.valid">Password is required.</mat-error>
+      </div>
     </div>
-</mat-dialog-content>
+  </mat-dialog-content>
+</form>
+<mat-dialog-actions align="center">
+  <button mat-stroked-button color="primary" class="btn controlbutton" type="button" (click)="delete()">
+    DELETE
+  </button>
+  <button mat-stroked-button color="primary" class="btn controlbutton" type="button" (click)="update()"
+    [disabled]="firstName.invalid || lastName.invalid || password.invalid">
+    UPDATE
+  </button>
+</mat-dialog-actions>

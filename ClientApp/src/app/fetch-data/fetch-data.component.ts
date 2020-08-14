@@ -15,6 +15,7 @@ export class FetchDataComponent implements OnInit {
   resultsLength: number;
   dialogdata={
     id:'',
+    email:'',
     firstName:'',
     lastName:'',
     password:''
@@ -47,6 +48,7 @@ export class FetchDataComponent implements OnInit {
     dialogConfig.width = "60%";
 
     this.dialogdata.id = e.id;
+    this.dialogdata.email = e.email;
     this.dialogdata.firstName = e.firstName;
     this.dialogdata.lastName = e.lastName;
     this.dialogdata.password = e.password;

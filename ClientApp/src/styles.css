@@ -26,3 +26,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 0px 10px 0px 10px;
   float: left;
 }
+
+.btn-align-right {
+  float: right;
+}

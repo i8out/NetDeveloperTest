@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -11,8 +11,10 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
-  MatSortModule, MatTableModule, MatDialogModule } from "@angular/material";
+import {
+  MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
+  MatSortModule, MatTableModule, MatDialogModule, MatButtonModule, MatIconModule
+} from "@angular/material";
 import { DetailDataComponent } from './detail-data/detail-data.component';
 
 @NgModule({
@@ -28,6 +30,7 @@ import { DetailDataComponent } from './detail-data/detail-data.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule, 
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
@@ -40,12 +43,14 @@ import { DetailDataComponent } from './detail-data/detail-data.component';
     MatSortModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [
     MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents:[DetailDataComponent]
+  entryComponents: [DetailDataComponent]
 })
 export class AppModule { }
