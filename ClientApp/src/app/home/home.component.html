@@ -36,7 +36,7 @@
                 <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </mat-form-field>
               <div>
-                <mat-error *ngIf="!password.valid">Email or password is not valid.</mat-error>
+                <mat-error *ngIf="!password.valid || !loginValid">Email or password is not valid.</mat-error>
               </div>
             </mat-dialog-content>
           </form>

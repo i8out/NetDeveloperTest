@@ -26,4 +26,9 @@ export class UserService {
     let body = JSON.stringify(formData);
     return this.cs.Delete(url);
   } 
+
+  public getLoginCredentials(formData: any): Observable<any> {
+    let url = this.baseUrl + 'api/users/byemail?email=' + formData.email;
+    return this.cs.Get(url);
+  }
 }
