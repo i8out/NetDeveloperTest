@@ -7,15 +7,15 @@ export class StorageService {
 
   constructor() { }
 
-  async store(storageKey: string, value: any){
-    const encryptedValue = atob(value);
+  async store(storageKey: string, value: string){
+    const encryptedValue = btoa(value);
     sessionStorage.setItem(storageKey, encryptedValue);
   }
 
   async get(storageKey: string){
     const resp = await sessionStorage.getItem(storageKey);
     if(resp){
-      return btoa(resp);
+      return atob(resp);
     } else{
       return false;
     }

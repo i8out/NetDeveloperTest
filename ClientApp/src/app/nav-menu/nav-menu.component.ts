@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { StorageService } from '../services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
@@ -9,7 +10,9 @@ import { StorageService } from '../services/storage.service';
 export class NavMenuComponent {
   isExpanded = false;
 
-  constructor(private storageService: StorageService) {}
+  constructor(
+    private router: Router,
+    private storageService: StorageService) {}
 
   collapse() {
     this.isExpanded = false;
@@ -21,5 +24,6 @@ export class NavMenuComponent {
 
   logout() {
     this.storageService.clear();
+    this.router.navigate(['']);
   }
 }
