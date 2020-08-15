@@ -34,7 +34,7 @@ export class HomeComponent {
     this.userService.getLoginCredentials(this.login).subscribe(result => {
       this.user = JSON.parse(JSON.stringify(result));
       console.log(this.user);
-      if (this.login.email == this.user.email
+      if (this.login.email.toLowerCase() == this.user.email.toLowerCase()
         && this.login.password == this.user.password) {
         this.loginValid = true;
         this.sessionKey.password = this.user.password;

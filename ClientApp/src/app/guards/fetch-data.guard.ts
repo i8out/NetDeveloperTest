@@ -14,9 +14,9 @@ export class FetchDataGuard implements CanActivate {
     canActivate(): Promise<boolean> {
         return new Promise(resolve => {
             resolve(true);
-            this.storageService.get(Constants.AUTH).then(res => {
-                console.log(res);
-                if (res) {
+            this.storageService.get(Constants.AUTH).then(result => {
+
+                if (result == 'ADMIN') {
                     resolve(true);
                 } else {
                     this.router.navigate(['error404']);

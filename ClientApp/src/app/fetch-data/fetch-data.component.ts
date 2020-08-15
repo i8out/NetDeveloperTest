@@ -37,7 +37,6 @@ export class FetchDataComponent implements OnInit {
 
   getData() {
     this.userService.getAllUsers().subscribe(result => {
-      console.log(result);
       this.users = result;
       this.resultsLength = this.users.length;
       this.datasource = new MatTableDataSource(this.users);
