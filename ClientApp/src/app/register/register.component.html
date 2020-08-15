@@ -1,0 +1,51 @@
+<button mat-icon-button mat-dialog-close class="btn-align-right">
+    <mat-icon>cancel</mat-icon>
+</button>
+<h2 mat-dialog-title>User Detail</h2>
+<form #f="ngForm" (ngSubmit)="update()">
+    <mat-dialog-content>
+        <div class='leftblock'>
+            <mat-form-field class="full">
+                <input matInput placeholder="First Name" name="firstName" required [formControl]="firstName"
+                    cdkFocusInitial>
+            </mat-form-field>
+            <div>
+                <mat-error *ngIf="!firstName.valid">First name is required.</mat-error>
+            </div>
+            <mat-form-field class="full">
+                <input matInput placeholder="Last Name" name="lastName" required [formControl]="lastName">
+            </mat-form-field>
+            <div>
+                <mat-error *ngIf="!lastName.valid">Last name is required.</mat-error>
+            </div>
+            <mat-form-field class="full">
+                <input matInput placeholder="Email" name="email" required [formControl]="email">
+            </mat-form-field>
+            <div>
+                <mat-error *ngIf="!email.valid">Email is not valid.</mat-error>
+            </div>
+        </div>
+        <div class='rightblock'>
+            <mat-form-field class="full">
+                <input matInput placeholder="Password" name="password" required [formControl]="password"
+                    type="password">
+            </mat-form-field>
+            <div>
+                <mat-error *ngIf="!password.valid">Password is required.</mat-error>
+            </div>
+            <mat-form-field class="full">
+                <input matInput placeholder="Confirm Password" name="confirmPassword" required
+                    [formControl]="confirmPassword" type="password">
+            </mat-form-field>
+            <div>
+                <mat-error *ngIf="!confirmPassword.valid">Passwords do not match.</mat-error>
+            </div>
+        </div>
+    </mat-dialog-content>
+</form>
+<mat-dialog-actions align="center">
+    <button mat-stroked-button color="primary" class="btn controlbutton" type="button" (click)="update()"
+        [disabled]="firstName.invalid || lastName.invalid || password.invalid || email.invalid">
+        REGISTER
+    </button>
+</mat-dialog-actions>

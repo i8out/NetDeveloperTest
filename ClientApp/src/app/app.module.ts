@@ -19,6 +19,7 @@ import { DetailDataComponent } from './detail-data/detail-data.component';
 import { Err404Component } from './err404/err404.component';
 import { FetchDataGuard } from './guards/fetch-data.guard';
 import { CounterGuard } from './guards/counter.guard';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CounterGuard } from './guards/counter.guard';
     CounterComponent,
     FetchDataComponent,
     DetailDataComponent,
-    Err404Component
+    Err404Component,
+    RegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -56,6 +58,6 @@ import { CounterGuard } from './guards/counter.guard';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DetailDataComponent]
+  entryComponents: [DetailDataComponent, RegisterComponent]
 })
 export class AppModule { }

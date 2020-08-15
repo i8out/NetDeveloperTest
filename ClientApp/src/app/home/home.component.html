@@ -20,7 +20,10 @@
     <div class="col-md">
       <h1>Join Here!</h1>
       <div class="p-5 border border-dark rounded">
-        <h3>Register here or login</h3>
+        <button mat-button class="btn controlbutton" type="button" (click)="register()">
+          <span class="h3"><mat-icon>arrow_forward</mat-icon>Register here<mat-icon>arrow_back</mat-icon></span>
+        </button>
+        <h3 style="padding-left: 5%;">or login</h3>
           <form #f="ngForm" (ngSubmit)="clickLogin()">
             <mat-dialog-content>
               <mat-form-field class="full">

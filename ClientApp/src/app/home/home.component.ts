@@ -7,6 +7,8 @@ import { StorageService } from '../services/storage.service';
 import { Constants } from '../models/constants';
 import { UserAuthorities } from '../models/user-authorities';
 import { Router } from '@angular/router';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +27,7 @@ export class HomeComponent {
 
   constructor(
     private router: Router,
+    private dialog: MatDialog,
     private storageService: StorageService,
     private userService: UserService) { }
 
@@ -50,6 +53,23 @@ export class HomeComponent {
       }
 
     });
+  }
+
+  register() {
+    const dialogConfig = new MatDialogConfig();
+    //dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "60%";
+
+    let dialogRef = this.dialog.open(RegisterComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      this.dialogClosed();
+    });
+
+  }
+
+  dialogClosed() {
+    // to be implemented
   }
 
 }

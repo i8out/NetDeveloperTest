@@ -1,11 +1,9 @@
 import { UserService } from './../services/user.service';
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { MatPaginator, MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 
 import { UserModel } from '../models/user-model';
 import { DetailDataComponent } from '../detail-data/detail-data.component';
-import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
 
 @Component({
   selector: 'app-fetch-data',
