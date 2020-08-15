@@ -1,8 +1,8 @@
+import { HomeGuard } from './guards/home.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -10,12 +10,14 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 import {
   MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
   MatSortModule, MatTableModule, MatDialogModule, MatButtonModule, MatIconModule
 } from "@angular/material";
 import { DetailDataComponent } from './detail-data/detail-data.component';
+import { Err404Component } from './err404/err404.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { DetailDataComponent } from './detail-data/detail-data.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    DetailDataComponent
+    DetailDataComponent,
+    Err404Component
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -34,7 +37,8 @@ import { DetailDataComponent } from './detail-data/detail-data.component';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'fetch-data', component: FetchDataComponent, canActivate: [HomeGuard] },
+      { path: 'error404', component: Err404Component }
     ]),
     BrowserAnimationsModule,
     MatInputModule,
