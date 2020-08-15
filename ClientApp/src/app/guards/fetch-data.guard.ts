@@ -6,7 +6,7 @@ import { Constants } from '../models/constants';
 @Injectable({
     providedIn: 'root'
 })
-export class HomeGuard implements CanActivate {
+export class FetchDataGuard implements CanActivate {
 
     constructor(private storageService: StorageService,
         private router: Router) { }
@@ -15,6 +15,7 @@ export class HomeGuard implements CanActivate {
         return new Promise(resolve => {
             resolve(true);
             this.storageService.get(Constants.AUTH).then(res => {
+                console.log(res);
                 if (res) {
                     resolve(true);
                 } else {

@@ -17,6 +17,11 @@
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/fetch-data']">Users</a>
           </li>
+          <li>
+            <button mat-button class="btn controlbutton" type="button" (click)="logout()">
+              Log-Out
+            </button>
+          </li>
         </ul>
       </div>
     </div>
