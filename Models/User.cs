@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NetDeveloperTest.Models
 {
-    public class User
+    public partial class User
     {
         public User()
         {
